@@ -9,7 +9,7 @@ image:
 
 Welcome to this comprehensive tutorial on GoLang's io.LimitReader! Today, we are going to discuss a powerful, yet often overlooked feature of the Go programming language, the io.LimitReader. We'll try to answer some crucial questions including what it is, why we need it, how it works and how to use it properly.
 
-# **What is LimitReader?**
+## **What is LimitReader?**
 
 io.LimitReader is a function provided by Go's io package. This function returns a Reader that reads from the provided reader, but only up to a specified number of bytes. The underlying implementation is a structure called a LimitedReader.
 
@@ -20,11 +20,11 @@ io.LimitReader is a function provided by Go's io package. This function returns 
 func LimitReader(r Reader, n int64) Reader { return &LimitedReader{r, n} }
 ```
 
-# **Why Use a LimitReader?**
+## **Why Use a LimitReader?**
 
 LimitReader is a great way to manage and control data when you're dealing with an unknown or potentially large amount of data. It's often used when you want to read from a stream but you don't want to allocate too much memory or you want to avoid a potential denial of service (DoS) attack by limiting the amount of data you read.
 
-# **How Does LimitReader Work?**
+## **How Does LimitReader Work?**
 
 The LimitReader function in Go's **`io`** package returns a structure called a **`LimitedReader`**. This structure contains two key components:
 
@@ -62,7 +62,7 @@ func (l *LimitedReader) Read(p []byte) (n int, err error) {
 
 In short, the **`LimitedReader`** is a mechanism that allows reading from a Reader but with a cap on the number of bytes that can be read. The **`Read`** method within **`LimitedReader`** helps enforce this cap, while delegating the actual reading operation to the underlying reader.
 
-# **Using LimitReader**
+## **Using LimitReader**
 
 Now, let's dive into a practical example to demonstrate how to use the io.LimitReader in a Go program.
 
@@ -112,6 +112,8 @@ Running this program will result in the output:
 Whole byte size: 30. Read byte size: 8
 Read byte: io.limit
 ```
+
+## **Conclusion**
 
 This example demonstrates the functionality of LimitReader, which allows you to control the amount of data to be read from a reader, thus providing a useful mechanism for managing data read operations.
 

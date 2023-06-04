@@ -9,7 +9,7 @@ image:
 
 In the vast library of Go's built-in packages, the **`io`** package stands out due to its sheer utility. Today, we'll be focusing on a particular function in this package - the **`io.TeeReader`** function.
 
-# **What is TeeReader?**
+## **What is TeeReader?**
 
 The **`io.TeeReader`** function in Go creates a new reader that simultaneously reads data from a source reader and writes the same data to a writer. You can think of it as a "T" junction in a pipeline, where data is flowing in from one direction and is split into two directions.
 
@@ -21,11 +21,11 @@ func TeeReader(r Reader, w Writer) Reader
 
 This function takes a **`Reader`** and a **`Writer`** as arguments and returns a **`Reader`**. The returned **`Reader`** behaves exactly like the original **`Reader`** with the added behavior of writing to the provided **`Writer`**.
 
-# **Why Use TeeReader?**
+## **Why Use TeeReader?**
 
 The power of **`io.TeeReader`** comes from its ability to "spy" on data as it's being read, without modifying the flow of data or the interface of the **`Reader`**. This makes it ideal for situations where you need to process the same data twice. Examples include logging raw data being read, calculating checksums on the fly, or displaying progress during data transfers, as you'll see in the upcoming example.
 
-# **How Does TeeReader Work?**
+## **How Does TeeReader Work?**
 
 The **`io.TeeReader`** function in Go's **`io`** package returns a new **`Reader`** that is essentially a structure called a **`teeReader`**. This structure has two significant components:
 
@@ -65,7 +65,7 @@ func (t *teeReader) Read(p []byte) (n int, err error) {
 
 In essence, the **`TeeReader`** is a conduit that allows data to be read from a **`Reader`** and simultaneously written to a **`Writer`**. The **`Read`** method within **`teeReader`** helps manage this process, allowing you to "spy" on data as it passes through without modifying the flow or the interface of the **`Reader`**.
 
-# **Using TeeReader**
+## **Using TeeReader**
 
 Now that we've seen how **`io.TeeReader`** works, let's dive into a practical example.
 
@@ -137,6 +137,8 @@ Downloading 328.869534 MB...
 
 By using **`io.TeeReader`**, we're able to easily add progress reporting functionality without changing how the original reader behaves.
 
-# **Conclusion**
+## **Conclusion**
 
-Go's **`io.TeeReader`** is a powerful function that can provide real-time insights into data as it's being read. By understanding its internals and how to use it, you can enhance your data pipelines with additional, simultaneous processing steps. Happy coding!
+Go's **`io.TeeReader`** is a powerful function that can provide real-time insights into data as it's being read. By understanding its internals and how to use it, you can enhance your data pipelines with additional, simultaneous processing steps. 
+
+Happy coding!
