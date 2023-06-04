@@ -13,7 +13,7 @@ baseurl: ""
 lang: en
 
 # Change to your timezone › http://www.timezoneconverter.com/cgi-bin/findzone/findzone
-timezone: Turkey
+timezone: Turkey  
 
 # jekyll-seo-tag settings › https://github.com/jekyll/jekyll-seo-tag/blob/master/docs/usage.md
 # ↓ --------------------------
@@ -80,7 +80,7 @@ theme_mode: dark
 img_cdn:
 
 # the avatar on sidebar, support local or CORS resources
-avatar: /assets/img/Mustafa_Durukan.jpg
+avatar: /assets/img/Personal/Mustafa_Durukan.jpg
 
 # boolean type, the global switch for TOC in posts.
 toc: true
