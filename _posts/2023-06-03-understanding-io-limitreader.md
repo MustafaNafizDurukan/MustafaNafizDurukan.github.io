@@ -5,7 +5,6 @@ categories: [Programming, Go]
 tags: [GO]
 image:
   path: /assets/img/Go/Go.png
-  alt: Golang mascote photo
 ---
 
 Welcome to this comprehensive tutorial on GoLang's io.LimitReader! Today, we are going to discuss a powerful, yet often overlooked feature of the Go programming language, the io.LimitReader. We'll try to answer some crucial questions including what it is, why we need it, how it works and how to use it properly.

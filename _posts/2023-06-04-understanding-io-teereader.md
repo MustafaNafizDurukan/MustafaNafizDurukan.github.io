@@ -5,7 +5,6 @@ categories: [Programming, Go]
 tags: [GO]
 image:
   path: /assets/img/Go/Go.png
-  alt: Golang mascote photo
 ---
 
 In the vast library of Go's built-in packages, the **`io`** package stands out due to its sheer utility. Today, we'll be focusing on a particular function in this package - the **`io.TeeReader`** function.
