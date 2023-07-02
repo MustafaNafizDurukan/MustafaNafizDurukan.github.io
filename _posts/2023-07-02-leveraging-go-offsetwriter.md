@@ -9,6 +9,7 @@ image:
 
 The **`io`** package within Go's vast array of built-in packages carries significant weight due to its extensive functionality. Today, we're diving deep into one of its key features: the **`io.OffsetWriter`** type. First introduced in Go version 1.20, this type opens the door to precise control over writing to specific offsets within data streams, such as a file.
 
+
 ## **What is OffsetWriter?**
 
 The **`io.OffsetWriter`** type in Go creates a new writer that enables writing to a specific offset of an underlying data stream, such as a file. It can be thought of as a “pointer” that can be moved to a particular position in the data stream.
