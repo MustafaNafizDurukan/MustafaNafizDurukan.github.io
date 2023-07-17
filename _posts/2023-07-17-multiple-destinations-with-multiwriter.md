@@ -4,7 +4,7 @@ date: 2023-07-17
 categories: [Programming, Go]
 tags: [GO]
 image:
-  path: /assets/img/Go/superman_gopher.png
+  path: /assets/img/Go/gopher_microphone.png
 ---
 
 The Go programming language, well-regarded for its simplicity and efficiency, has an extensive standard library containing a plethora of built-in packages. Among these, the **`io`** package plays a critical role due to its wide-ranging functionality, handling I/O operations. Today, our attention will be directed towards the **`MultiWriter`** type, an important feature of the **`io`** package.
