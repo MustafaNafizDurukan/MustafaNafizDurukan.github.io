@@ -41,10 +41,8 @@ social:
   email: mdurukan79@gmail.com # change to your email address
   links:
     # The first element serves as the copyright owner's link
-    - https://twitter.com/mustafandurukan # change to your twitter homepage
-    - https://github.com/MustafaNafizDurukan # change to your github homepage
-    # Uncomment below to add more social links
-    # - https://www.facebook.com/username
+    - https://twitter.com/mustafandurukan
+    - https://github.com/MustafaNafizDurukan 
     - https://www.linkedin.com/in/mustafa-durukan
 
 google_site_verification: # fill in to your verification string
@@ -53,7 +51,7 @@ google_site_verification: # fill in to your verification string
 # The end of `jekyll-seo-tag` settings
 
 google_analytics:
-  id: # fill in your Google Analytics ID
+  id: G-H5934VSQNR # fill in your Google Analytics ID
   # Google Analytics pageviews report settings
   pv:
     proxy_endpoint: # fill in the Google Analytics superProxy endpoint of Google App Engine
