@@ -7,8 +7,6 @@ image:
   path: /assets/img/deep-dive-dll-injection/cover.png
 ---
 
-# DLL Injection
-
 ## Why is DLL Injection used?
 
 Most cracked programs, cheats used in games, malicious software, etc., utilize a method known as DLL Injection to modify specific data types (int, float, etc.) in the victim software, conceal malicious activity, or enhance the functionality of the victim software.
