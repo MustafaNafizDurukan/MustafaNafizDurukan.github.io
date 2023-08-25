@@ -1,6 +1,6 @@
 ---
 title: "Deep Dive into DLL Injection: A Static Analysis with PEStudio and OllyDebug"
-date: 2023-08-25
+date: 2023-08-24
 categories: [Techniques, DLL Injection]
 tags: [DLL Injection]
 image:
