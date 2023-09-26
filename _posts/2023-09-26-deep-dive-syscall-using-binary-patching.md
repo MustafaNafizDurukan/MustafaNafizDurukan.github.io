@@ -5,7 +5,7 @@ categories: [Windows, Syscall]
 tags: [IDA, Syscall, Windows, WinDBG, Assembly, C++]
 image:
   path: /assets/img/deep-dive-syscall-using-binary-patching/cover.webp
----
+--- 
 
 ## What?
 
