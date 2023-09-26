@@ -11,13 +11,13 @@ image:
 
 In this article, we will embark on a fascinating journey into the intricate world of Windows system calls. Our exploration is divided into two major segments: User-Side and Kernel-Side.
 
-### **User-Side**
+### User-Side
 
 `Writing User-Mode Code`: We begin our expedition by crafting a simple yet powerful C++ program designed to interact with the Windows kernel through system calls. We'll introduce you to the essential concepts and tools needed to dissect user-mode code.
 
 `Analyzing User-Mode Code`: With the assistance of the IDA disassembler and debugger, we delve into the inner workings of our user-mode program. We'll break down the steps involved in locating the main function, setting breakpoints, and tracing the code execution, revealing how user-mode code interfaces with the Windows kernel via syscalls.
 
-### **Kernel-Side**
+### Kernel-Side
 
 `Understanding the Kernel`: In this segment, we take a deep dive into the Windows kernel. We'll attach a kernel debugger to a guest operating system, providing insights into how syscalls are processed within the kernel.
 
