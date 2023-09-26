@@ -2,7 +2,7 @@
 title: "From Userland to Kernel: Deep Dive into SYSCALLs using WinDbg and Binary Patching"
 date: 2023-09-26
 categories: [Windows, Syscall]
-tags: [IDA, Syscall, Windows, WinDBG]
+tags: [IDA, Syscall, Windows, WinDBG, Assembly, C++]
 image:
   path: /assets/img/deep-dive-syscall-using-binary-patching/cover.webp
 ---
