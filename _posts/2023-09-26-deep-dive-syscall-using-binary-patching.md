@@ -49,23 +49,23 @@ At first glance, this code seems to make a call to the familiar **`WaitForSingle
 
 In this section, we'll delve into the process of dissecting user-mode code, a task made possible with the assistance of the IDA disassembler and debugger. Our objective is to comprehend how a seemingly simple user-mode application like the one we've created interacts with the Windows kernel via syscalls.
 
-1. **Opening the Executable with IDA:** Our journey commences with the act of opening our compiled executable within IDA, a versatile tool revered for its disassembling and debugging capabilities.
-2. **Locating the Main Function:** Inside IDA's interface, we embark on a quest to locate the main function of our program. This function is the epicenter of our code's execution.
-3. **Setting a Breakpoint:** To gain insights into the code, we strategically plant a breakpoint within our source code, specifically at the juncture where the **`WaitForSingleObject`** API is summoned. This meticulously placed breakpoint acts as a sentinel, temporarily pausing program execution and allowing us to scrutinize the code step by step.
+1. **Opening the Executable with IDA:** Let's start by opening our program using IDA, a powerful tool known for breaking down and fixing software issues.
+2. **Locating the Main Function:** In IDA, we'll look for the central part of our program, known as the main function. It's where everything happens.
+3. **Setting a Breakpoint:** To understand the code better, we'll put a pause button in our code, right where the **`WaitForSingleObject`** function is called. This pause lets us look at the code step by step.
 
 ![Untitled](/assets/img/deep-dive-syscall-using-binary-patching/Untitled.png)
 
-With the breakpoint in position, we commence the debugging process. When the code execution reaches this point, the program gracefully halts, inviting us to inspect its inner workings with meticulous care.
+With the pause button set, we begin the process of fixing problems in our program. When we get to this point in the code, the program stops nicely, giving us a chance to carefully check how it's working inside.
 
-As we navigate through the code, an intriguing discovery awaits: our path leads us deeper into the heart of the **`kernelbase32.dll`** library.
+As we look through the code, we find something interesting: we're going further into the core of a library called **`kernelbase32.dll`**.
 
-Our ultimate aim lies in reaching the **`NtWaitForSingleObject`** syscall, concealed within the recesses of the **`ntdll.dll`** library. This juncture marks a pivotal transition from user mode into the enigmatic realm of kernel mode.
+Our main goal is to get to the **`NtWaitForSingleObject`** thing hidden deep in the **`ntdll.dll`** library. This is an important part where the program goes from regular mode to a more complicated mode called kernel mode.
 
 ![Untitled](/assets/img/deep-dive-syscall-using-binary-patching/Untitled1.png)
 
-As depicted in the code snippet above, we finally arrive at the doorstep of the **`NtWaitForSingleObject`** function, nestled securely within the confines of the **`ntdll.dll`** library. At this juncture, the stage is set for the syscall to be invoked, signaling the imminent transition to kernel mode.
+As shown in the code snippet above, we've finally reached an important part called the **`NtWaitForSingleObject`** function, tucked away safely inside the **`ntdll.dll`** library. When we get here, it's like the program is about to make a big change and move into a more complicated mode called kernel mode.
 
-From this juncture onward, the code execution undergoes a remarkable transformation as it transcends into the depths of kernel mode. Here, the reins are handed over to the Windows kernel, which assumes control over the processing. Every subsequent operation, including syscalls, unfolds within this enigmatic domain.
+Starting from this point, the way the code works goes through a big change as it goes deeper into kernel mode. In kernel mode, the Windows core takes over and manages everything, including important operations like syscalls, in this mysterious part of the computer's operation.
 
 ![Untitled](/assets/img/deep-dive-syscall-using-binary-patching/Untitled2.png)
 
@@ -80,7 +80,7 @@ ntdll.dll:00007FFDE35ACDF2 syscall                                 ; Low latency
 ntdll.dll:00007FFDE35ACDF4 retn
 ```
 
-By unraveling the intricacies of this user-mode journey, we lay a solid foundation for our forthcoming expedition into kernel debugging using WinDbg. Join us as we embark on this captivating path of exploration.
+As we figure out how things work in user mode, we're getting ready for the next step: kernel debugging with WinDbg. Come along as we start this exciting adventure of learning and discovery.
 
 ## Kernel-Side
 
@@ -337,7 +337,7 @@ fffff8050a4131a4 65488b242508900000   mov     rsp, qword ptr gs:[9008h]
 fffff8050a4131ad 6a2b                 push    2Bh
 
 ; Our binary patch to jump our trap
-fffff8050a4131af e92c020000           jmp     ntkrnlmp!KiSystemCall64Shadow+0x260 (fffff805`0a4133e0)
+fffff8050a4131af e92c020000           jmp     ntkrnlmp!KiSystemCall64Shadow+0x260 (fffff8050a4133e0)
 fffff8050a4131b4 90                   nop
 fffff8050a4131b5 90                   nop
 fffff8050a4131b6 90                   nop
@@ -468,9 +468,11 @@ Finally, place the breakpoint at the `fffff8050a4133ef` address (in case of ou
 
 After that let the guest OS run and step into the `syscall` from the `NtWaitForSingleObject` user-mode function. This should trigger the breakpoint in the kernel.
 
-Now we hit the breakpoint earlier we set.
-
 ![Untitled](/assets/img/deep-dive-syscall-using-binary-patching/Untitled9.png)
+
+Now we hit the breakpoint earlier we set.
+Which means we succcesfully set a conditional breakpoint on kernel with assembly and debugged our `NtWaitForSingleObject` program on directly syscall.
+
 
 Now lets put breakpoint on `KiSystemServiceUser` function and run debugger again. 
 
@@ -480,7 +482,7 @@ After the breakpoint is triggered, you'll encounter another instruction within t
 
 ![Untitled](/assets/img/deep-dive-syscall-using-binary-patching/Untitled11.png)
 
-After step into that you can analyze kernel freely.
+After step into the **`call rax`**. You can analyze kernel freely.
 
 ![Untitled](/assets/img/deep-dive-syscall-using-binary-patching/Untitled12.png)
 
