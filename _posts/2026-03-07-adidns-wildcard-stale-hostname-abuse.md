@@ -1,7 +1,7 @@
 ---
 title: "ADIDNS Wildcard Abuse: Weaponizing Stale Hostnames and Legacy Shortcuts for NTLM Relay"
 description: "Exploiting AD-integrated DNS wildcard record creation to resurrect decommissioned internal hostnames, turning legacy shortcuts and share references into credential capture vectors via NTLM relay with SOCKS proxy for lateral movement."
-date: 2026-03-09
+date: 2026-03-07
 categories: [Active Directory, Vulnerability]
 tags: [active-directory, adidns, ntlm-relay, dns, lateral-movement]
 image:
