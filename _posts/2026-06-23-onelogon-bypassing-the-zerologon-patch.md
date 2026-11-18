@@ -5,7 +5,7 @@ date: 2026-06-23
 categories: [Active Directory, Vulnerability]
 tags: [active-directory, netlogon, zerologon, onelogon, cve-2020-1472]
 image:
-  path: /assets/img/onelogon-bypassing-the-zerologon-patch/cover.webp
+  path: /assets/img/onelogon-bypassing-the-zerologon-patch/cover.png
 ---
 
 ## Executive Summary
@@ -22,7 +22,7 @@ The impact is the same as the original. An attacker with no domain credentials c
 
 This is not a rare misconfiguration. SpecterOps data in the paper shows the policy still active in 23% of 44 enterprise environments five years after Zerologon. Across a separate set of 270 enterprises, 6 of them (2.2%) were directly exploitable by Onelogon.
 
-A proper fix needs a backward-incompatible rewrite of AES-CFB8. So no patch is expected soon. The only reliable defense today is simple: keep the `VulnerableChannelAllowList` empty, and keep Netlogon enforcement mode on. This article walks the issue end to end in our `cred.local` lab. We build the vulnerable state, detect it, exploit it, then remediate.
+A proper fix needs a backward-incompatible rewrite of AES-CFB8. So no patch is expected soon. The only reliable defense today is simple: keep the `VulnerableChannelAllowList` empty, and keep Netlogon enforcement mode on. This post walks through the issue end to end in my `cred.local` lab: building the vulnerable state, detecting it, exploiting it, then remediating it.
 
 ## Introduction
 
@@ -113,7 +113,7 @@ Both fit inside the DC's 120-second challenge window. The meet-in-the-middle tak
 
 ### Reproduce the Vulnerable Setup
 
-This step builds the lab and plants the misconfiguration. In a real environment this allow-list entry is exactly what you hunt for. Here we add it on purpose so the attack is reproducible.
+This step builds the lab and plants the misconfiguration. In a real environment this allow-list entry is exactly what you hunt for. Here I add it on purpose so the attack is reproducible.
 
 Add the DC machine account to the allow list through Group Policy. The `WD` SID means Everyone, which covers `dc01$`.
 
@@ -199,8 +199,6 @@ No dedicated tooling is needed to catch this. Watch for a non-empty `VulnerableC
 | 5831 | Allowed - trust account permitted via VulnerableChannelAllowList |
 | 5805 | Session setup from machine failed to authenticate |
 
-For alerts built on these events, see the [Zerologon (Vulnerable Netlogon Secure Channel) detection rules](https://forestall.io/resources/detection-rules/zerologon-netlogon-secure-channel): Sigma rules with Splunk, Sentinel and QRadar queries.
-
 ## Exploitation
 
 > **Warning:** This section documents a lab reproduction for educational purposes. Run these steps only in an isolated environment you control. The attack empties a machine-account password in Active Directory, breaking domain connectivity for that host until the password is restored.
@@ -245,7 +243,7 @@ The tool binds to Netlogon and negotiates the AES flags. Then it brute-forces a 
 
 The flag dump is worth a look. Flag `W` shows the AES-CFB8 construction is active. Flag `Y = 0` shows the channel does not require secure RPC. That is only possible because `dc01$` is on the allow list.
 
-One note on timing. The attack is probabilistic, so the run is not fixed. In our lab it landed after roughly 16 to 18 cycles, near the 40-minute mark. The bottleneck is the per-attempt round-trip to the DC, not CPU. Run the attack from a host on the DC's own subnet for the best results.
+One note on timing. The attack is probabilistic, so the run is not fixed. In my lab it landed after roughly 16 to 18 cycles, near the 40-minute mark. The bottleneck is the per-attempt round-trip to the DC, not CPU. Run the attack from a host on the DC's own subnet for the best results.
 
 ![Successful meet-in-the-middle exploitation against dc01](/assets/img/onelogon-bypassing-the-zerologon-patch/3-mitm-exploit-success.webp)
 _The attack succeeds and empties the `dc01$` machine-account password._
@@ -349,5 +347,3 @@ The fix is not a patch -- it is a configuration audit. Any non-empty allow-list 
 ---
 
 *This research is published for educational purposes. Testing this technique against systems without explicit authorization is prohibited.*
-
-*Originally published on the [Forestall blog](https://forestall.io/resources/blog/onelogon-bypassing-the-zerologon-patch).*
